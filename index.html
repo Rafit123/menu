@@ -1,0 +1,358 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rafael Gómez - Menú de Prácticas</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(10%, 10%) scale(1.1); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-section {
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .profile-pic {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 50px;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            flex-shrink: 0;
+        }
+
+        .profile-info {
+            flex: 1;
+        }
+
+        .profile-info h2 {
+            color: #333;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin: 8px 0;
+            color: #666;
+            font-size: 1em;
+        }
+
+        .info-item::before {
+            content: '📍';
+            margin-right: 10px;
+            font-size: 1.2em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section-title {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 30px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+            display: inline-block;
+        }
+
+        .practices-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .practice-card {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 30px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border-left: 5px solid #667eea;
+            cursor: pointer;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .practice-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .practice-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            border-left-color: #764ba2;
+        }
+
+        .practice-card:hover::before {
+            opacity: 1;
+        }
+
+        .practice-icon {
+            font-size: 60px;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .practice-card h3 {
+            color: #333;
+            font-size: 1.4em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .practice-card p {
+            color: #666;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .practice-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            position: relative;
+            z-index: 1;
+        }
+
+        .practice-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .footer {
+            background: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            color: #666;
+            border-top: 2px solid #e0e0e0;
+        }
+
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .footer-link:hover {
+            color: #764ba2;
+        }
+
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .practices-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎓 Portal de Prácticas</h1>
+            <p class="subtitle">Diseño Web - Trabajos y Proyectos</p>
+        </div>
+
+        <div class="profile-section">
+            <div class="profile-pic">RG</div>
+            <div class="profile-info">
+                <h2>Rafael Gómez</h2>
+                <div class="info-item">Cochabamba, Bolivia</div>
+                <div class="info-item">UPDS - Cochabamba</div>
+                <div class="info-item">📅 2025</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2 class="section-title">📚 Selecciona una Práctica</h2>
+            
+            <div class="practices-grid">
+                <div class="practice-card">
+                    <div class="practice-icon">🌐</div>
+                    <h3>Práctica 1</h3>
+                    <p>Servidor Web</p>
+                    <button class="practice-button" onclick="irAPractica(1)">Abrir Práctica</button>
+                </div>
+
+                <div class="practice-card">
+                    <div class="practice-icon">💻</div>
+                    <h3>Práctica 2</h3>
+                    <p>Desarrollo Web</p>
+                    <button class="practice-button" onclick="irAPractica(2)">Abrir Práctica</button>
+                </div>
+
+                <div class="practice-card">
+                    <div class="practice-icon">🎨</div>
+                    <h3>Práctica 3</h3>
+                    <p>Diseño y CSS</p>
+                    <button class="practice-button" onclick="irAPractica(3)">Abrir Práctica</button>
+                </div>
+
+                <div class="practice-card">
+                    <div class="practice-icon">⚡</div>
+                    <h3>Práctica 4</h3>
+                    <p>JavaScript Avanzado</p>
+                    <button class="practice-button" onclick="irAPractica(4)">Abrir Práctica</button>
+                </div>
+
+                <div class="practice-card">
+                    <div class="practice-icon">📱</div>
+                    <h3>Práctica 5</h3>
+                    <p>Diseño Responsive</p>
+                    <button class="practice-button" onclick="irAPractica(5)">Abrir Práctica</button>
+                </div>
+
+                <div class="practice-card">
+                    <div class="practice-icon">🚀</div>
+                    <h3>Práctica 6</h3>
+                    <p>Proyecto Final</p>
+                    <button class="practice-button" onclick="irAPractica(6)">Abrir Práctica</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2025 Rafael Gómez - Todos los derechos reservados</p>
+            <p style="margin-top: 10px;">
+                <a href="https://www.upds.edu.bo" class="footer-link" target="_blank">UPDS - Cochabamba</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function irAPractica(numero) {
+            // Aquí debes reemplazar 'practica1.html', 'practica2.html', etc. 
+            // con las rutas reales de tus archivos HTML de cada práctica
+            const practicas = {
+                1: 'practica1.html',
+                2: 'practica2.html',
+                3: 'practica3.html',
+                4: 'practica4.html',
+                5: 'practica5.html',
+                6: 'practica6.html'
+            };
+            
+            // Redirige a la página de la práctica
+            window.location.href = practicas[numero];
+        }
+    </script>
+</body>
+</html>
