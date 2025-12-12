@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Práctica 3 - JavaScript</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        header p {
+            opacity: 0.9;
+        }
+        
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 30px;
+            background: #f8f9fa;
+        }
+        
+        .menu-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 20px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        
+        .menu-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .menu-btn:active {
+            transform: translateY(0);
+        }
+        
+        .output {
+            padding: 30px;
+            min-height: 200px;
+        }
+        
+        .output h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-size: 1.5em;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .btn-ejecutar {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .btn-ejecutar:hover {
+            background: #5568d3;
+        }
+        
+        .resultado {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 8px;
+        }
+        
+        .resultado pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            font-family: 'Courier New', monospace;
+            color: #333;
+        }
+        
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Práctica 3 - JavaScript</h1>
+            <p>Tecnología Web I - Lic. Faviola Gabriela Soliz Tapia</p>
+        </header>
+        
+        <div class="menu">
+            <button class="menu-btn" onclick="mostrarEjercicio(1)">Ejercicio 1<br>Temperatura</button>
+            <button class="menu-btn" onclick="mostrarEjercicio(2)">Ejercicio 2<br>Fizz-Buzz</button>
+            <button class="menu-btn" onclick="mostrarEjercicio(3)">Ejercicio 3<br>Fecha Actual</button>
+            <button class="menu-btn" onclick="mostrarEjercicio(4)">Ejercicio 4<br>Lugar Turístico</button>
+            <button class="menu-btn" onclick="mostrarEjercicio(5)">Ejercicio 5<br>Hotel</button>
+        </div>
+        
+        <div class="output" id="output">
+            <h2>Selecciona un ejercicio del menú</h2>
+            <p>Haz clic en cualquiera de los botones para ejecutar el ejercicio correspondiente.</p>
+        </div>
+    </div>
+
+    <script>
+        // EJERCICIO 1: Temperatura y Clima
+        function determinarClima(temperatura) {
+            if (temperatura >= -10 && temperatura <= 15) {
+                return "Frio";
+            } else if (temperatura >= 16 && temperatura <= 25) {
+                return "Templado";
+            } else if (temperatura >= 26 && temperatura <= 40) {
+                return "Calor";
+            } else {
+                return "Temperatura fuera de rango";
+            }
+        }
+
+        // EJERCICIO 2: Fizz-Buzz
+        function fizzBuzz() {
+            let resultado = "";
+            for (let i = 1; i <= 100; i++) {
+                if (i % 3 === 0 && i % 5 === 0) {
+                    resultado += i + ": FizzBuzz\n";
+                } else if (i % 3 === 0) {
+                    resultado += i + ": Fizz\n";
+                } else if (i % 5 === 0) {
+                    resultado += i + ": Buzz\n";
+                }
+            }
+            return resultado;
+        }
+
+        // EJERCICIO 3: Fecha Actual
+        function obtenerFechaActual() {
+            const dias = ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'];
+            const meses = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+                          'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+            
+            const fecha = new Date();
+            const diaSemana = dias[fecha.getDay()];
+            const dia = fecha.getDate();
+            const mes = meses[fecha.getMonth()];
+            const año = fecha.getFullYear();
+            
+            return `${diaSemana}, ${dia} de ${mes} del ${año}`;
+        }
+
+        // EJERCICIO 4: Lugar Turístico
+        const lugarTuristico = {
+            nombre: "Cristo de la Concordia",
+            ciudad: "Cochabamba",
+            precioEntrada: 10,
+            horario: "9:00 AM - 6:00 PM",
+            calificaciones: [4.5, 5, 4.8, 4.9, 5],
+            
+            promedioCalificaciones() {
+                const suma = this.calificaciones.reduce((acc, cal) => acc + cal, 0);
+                return (suma / this.calificaciones.length).toFixed(2);
+            },
+            
+            aplicarDescuento(porcentaje) {
+                const descuento = this.precioEntrada * (porcentaje / 100);
+                this.precioEntrada -= descuento;
+                return this.precioEntrada.toFixed(2);
+            },
+            
+            info() {
+                return `Lugar: ${this.nombre}\nCiudad: ${this.ciudad}\nPrecio: Bs. ${this.precioEntrada}\nHorario: ${this.horario}\nCalificación promedio: ${this.promedioCalificaciones()} estrellas`;
+            }
+        };
+
+        // EJERCICIO 5: Clase Hotel
+        class Hotel {
+            constructor(nombre, ciudad, habitacionesDisponibles) {
+                this.nombre = nombre;
+                this.ciudad = ciudad;
+                this.habitacionesDisponibles = habitacionesDisponibles;
+            }
+            
+            reservar(cantidad) {
+                if (cantidad <= 0) {
+                    return "La cantidad debe ser mayor a 0";
+                }
+                if (this.habitacionesDisponibles - cantidad < 0) {
+                    return `No hay suficientes habitaciones disponibles. Solo hay ${this.habitacionesDisponibles} habitaciones.`;
+                }
+                this.habitacionesDisponibles -= cantidad;
+                return `Reserva exitosa. Habitaciones disponibles: ${this.habitacionesDisponibles}`;
+            }
+            
+            liberar(cantidad) {
+                if (cantidad <= 0) {
+                    return "La cantidad debe ser mayor a 0";
+                }
+                this.habitacionesDisponibles += cantidad;
+                return `Habitaciones liberadas. Habitaciones disponibles: ${this.habitacionesDisponibles}`;
+            }
+            
+            info() {
+                return `Hotel: ${this.nombre}\nCiudad: ${this.ciudad}\nHabitaciones disponibles: ${this.habitacionesDisponibles}`;
+            }
+        }
+
+        // Función para mostrar ejercicios
+        function mostrarEjercicio(num) {
+            const output = document.getElementById('output');
+            
+            switch(num) {
+                case 1:
+                    output.innerHTML = `
+                        <h2>Ejercicio 1: Determinar Clima según Temperatura</h2>
+                        <div class="input-group">
+                            <label>Ingresa la temperatura en °C:</label>
+                            <input type="number" id="temperatura" placeholder="Ej: 20">
+                        </div>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio1()">Determinar Clima</button>
+                        <div id="resultado1" class="hidden"></div>
+                    `;
+                    break;
+                    
+                case 2:
+                    output.innerHTML = `
+                        <h2>Ejercicio 2: Algoritmo Fizz-Buzz (1-100)</h2>
+                        <p>Este algoritmo cuenta del 1 al 100, mostrando "Fizz" para múltiplos de 3, "Buzz" para múltiplos de 5, y "FizzBuzz" para múltiplos de ambos.</p>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio2()">Ejecutar Fizz-Buzz</button>
+                        <div id="resultado2" class="hidden"></div>
+                    `;
+                    break;
+                    
+                case 3:
+                    output.innerHTML = `
+                        <h2>Ejercicio 3: Mostrar Fecha Actual</h2>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio3()">Mostrar Fecha</button>
+                        <div id="resultado3" class="hidden"></div>
+                    `;
+                    break;
+                    
+                case 4:
+                    output.innerHTML = `
+                        <h2>Ejercicio 4: Objeto Lugar Turístico</h2>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio4('info')">Mostrar Información</button>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio4('promedio')">Calcular Promedio</button>
+                        <div style="margin-top: 15px;">
+                            <label>Aplicar descuento (%):</label>
+                            <input type="number" id="descuento" placeholder="Ej: 20" style="width: 150px; padding: 8px; margin: 0 10px; border: 2px solid #e0e0e0; border-radius: 5px;">
+                            <button class="btn-ejecutar" onclick="ejecutarEjercicio4('descuento')">Aplicar</button>
+                        </div>
+                        <div id="resultado4" class="hidden"></div>
+                    `;
+                    break;
+                    
+                case 5:
+                    output.innerHTML = `
+                        <h2>Ejercicio 5: Sistema de Hotel</h2>
+                        <button class="btn-ejecutar" onclick="ejecutarEjercicio5('crear')">Crear Hotel</button>
+                        <div style="margin-top: 15px;">
+                            <label>Reservar habitaciones:</label>
+                            <input type="number" id="reservar" placeholder="Cantidad" style="width: 150px; padding: 8px; margin: 0 10px; border: 2px solid #e0e0e0; border-radius: 5px;">
+                            <button class="btn-ejecutar" onclick="ejecutarEjercicio5('reservar')">Reservar</button>
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <label>Liberar habitaciones:</label>
+                            <input type="number" id="liberar" placeholder="Cantidad" style="width: 150px; padding: 8px; margin: 0 10px; border: 2px solid #e0e0e0; border-radius: 5px;">
+                            <button class="btn-ejecutar" onclick="ejecutarEjercicio5('liberar')">Liberar</button>
+                        </div>
+                        <div id="resultado5" class="hidden"></div>
+                    `;
+                    break;
+            }
+        }
+
+        // Ejecutar Ejercicio 1
+        function ejecutarEjercicio1() {
+            const temp = parseFloat(document.getElementById('temperatura').value);
+            const resultado = document.getElementById('resultado1');
+            
+            if (isNaN(temp)) {
+                resultado.innerHTML = '<div class="resultado"><pre>Por favor ingresa una temperatura válida.</pre></div>';
+            } else {
+                const clima = determinarClima(temp);
+                resultado.innerHTML = `<div class="resultado"><pre>Temperatura: ${temp}°C\nResultado: ${clima}</pre></div>`;
+            }
+            resultado.classList.remove('hidden');
+        }
+
+        // Ejecutar Ejercicio 2
+        function ejecutarEjercicio2() {
+            const resultado = document.getElementById('resultado2');
+            const salida = fizzBuzz();
+            resultado.innerHTML = `<div class="resultado"><pre>${salida}</pre></div>`;
+            resultado.classList.remove('hidden');
+        }
+
+        // Ejecutar Ejercicio 3
+        function ejecutarEjercicio3() {
+            const resultado = document.getElementById('resultado3');
+            const fecha = obtenerFechaActual();
+            resultado.innerHTML = `<div class="resultado"><pre>${fecha}</pre></div>`;
+            resultado.classList.remove('hidden');
+        }
+
+        // Ejecutar Ejercicio 4
+        function ejecutarEjercicio4(accion) {
+            const resultado = document.getElementById('resultado4');
+            let salida = '';
+            
+            if (accion === 'info') {
+                salida = lugarTuristico.info();
+            } else if (accion === 'promedio') {
+                salida = `Promedio de calificaciones: ${lugarTuristico.promedioCalificaciones()} estrellas`;
+            } else if (accion === 'descuento') {
+                const porcentaje = parseFloat(document.getElementById('descuento').value);
+                if (isNaN(porcentaje) || porcentaje <= 0) {
+                    salida = 'Por favor ingresa un porcentaje válido.';
+                } else {
+                    const nuevoPrecio = lugarTuristico.aplicarDescuento(porcentaje);
+                    salida = `Descuento aplicado: ${porcentaje}%\nNuevo precio: Bs. ${nuevoPrecio}`;
+                }
+            }
+            
+            resultado.innerHTML = `<div class="resultado"><pre>${salida}</pre></div>`;
+            resultado.classList.remove('hidden');
+        }
+
+        // Variable global para el hotel
+        let miHotel = null;
+
+        // Ejecutar Ejercicio 5
+        function ejecutarEjercicio5(accion) {
+            const resultado = document.getElementById('resultado5');
+            let salida = '';
+            
+            if (accion === 'crear') {
+                miHotel = new Hotel('Hotel Plaza', 'Cochabamba', 50);
+                salida = 'Hotel creado exitosamente:\n\n' + miHotel.info();
+            } else if (accion === 'reservar') {
+                if (!miHotel) {
+                    salida = 'Primero debes crear un hotel.';
+                } else {
+                    const cantidad = parseInt(document.getElementById('reservar').value);
+                    if (isNaN(cantidad)) {
+                        salida = 'Por favor ingresa una cantidad válida.';
+                    } else {
+                        salida = miHotel.reservar(cantidad) + '\n\n' + miHotel.info();
+                    }
+                }
+            } else if (accion === 'liberar') {
+                if (!miHotel) {
+                    salida = 'Primero debes crear un hotel.';
+                } else {
+                    const cantidad = parseInt(document.getElementById('liberar').value);
+                    if (isNaN(cantidad)) {
+                        salida = 'Por favor ingresa una cantidad válida.';
+                    } else {
+                        salida = miHotel.liberar(cantidad) + '\n\n' + miHotel.info();
+                    }
+                }
+            }
+            
+            resultado.innerHTML = `<div class="resultado"><pre>${salida}</pre></div>`;
+            resultado.classList.remove('hidden');
+        }
+    </script>
+</body>
+</html>
