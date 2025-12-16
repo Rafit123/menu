@@ -1,0 +1,61 @@
+{
+  "pais": "Bolivia",
+  "descripcion": "Bolivia es un país diverso en cultura, geografía y tradiciones, con destinos naturales y patrimoniales únicos en Sudamérica.",
+  "ciudades": [
+    {
+      "nombre": "Santa Cruz de la Sierra",
+      "departamento": "Santa Cruz",
+      "clima": "Cálido",
+      "atracciones": [
+        {
+          "nombre": "Plaza 24 de Septiembre",
+          "tipo": "Histórico",
+          "descripcion": "Centro histórico y cultural de la ciudad",
+          "horario": "Todo el día",
+          "precio_entrada": 0
+        },
+        {
+          "nombre": "Biocentro Güembé",
+          "tipo": "Natural",
+          "descripcion": "Reserva ecológica con mariposas y piscinas naturales",
+          "horario": "09:00 - 18:00",
+          "precio_entrada": 80
+        }
+      ],
+      "gastronomia": [
+        "Majadito",
+        "Locro",
+        "Sonso"
+      ]
+    },
+    {
+      "nombre": "La Paz",
+      "departamento": "La Paz",
+      "clima": "Frío",
+      "atracciones": [
+        {
+          "nombre": "Valle de la Luna",
+          "tipo": "Natural",
+          "descripcion": "Formaciones geológicas únicas",
+          "horario": "09:00 - 17:00",
+          "precio_entrada": 15
+        },
+        {
+          "nombre": "Mi Teleférico",
+          "tipo": "Urbano",
+          "descripcion": "Sistema de transporte aéreo con vistas panorámicas",
+          "horario": "06:00 - 23:00",
+          "precio_entrada": 3
+        }
+      ],
+      "gastronomia": [
+        "Salteñas",
+        "Api con pastel",
+        "Chairo"
+      ]
+    }
+  ],
+  "moneda": "Boliviano",
+  "idioma": "Español",
+  "mejor_epoca_visita": "Mayo a Octubre"
+}
